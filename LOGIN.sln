@@ -1,25 +1,78 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36717.8 d17.14
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOGIN", "LOGIN\LOGIN.csproj", "{A04948B2-17FC-47A9-B9A9-29D5EC84174B}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A04948B2-17FC-47A9-B9A9-29D5EC84174B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A04948B2-17FC-47A9-B9A9-29D5EC84174B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A04948B2-17FC-47A9-B9A9-29D5EC84174B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A04948B2-17FC-47A9-B9A9-29D5EC84174B}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7E67882F-AFD7-4C75-86B0-F16B20CF0F39}
-	EndGlobalSection
-EndGlobal
+namespace JogoBird
+{
+    public partial class Form1 : Form
+    {
+
+        int pipeSpeed = 8;
+        int gravity = 15;
+        int score = 0;
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void gameTimerEvent(object sender, EventArgs e)
+        {
+            FlappyBird.Top += gravity;
+            pipeBottom.Left -= pipeSpeed;
+            pipetop.Left -= pipeSpeed;
+            scoreText.Text = "Score: " + score;
+
+
+            if (pipeBottom.Left < -150)
+            {
+                pipeBottom.Left = 800;
+                score++;
+            }
+
+            if (pipetop.Left < -180)
+            {
+                pipetop.Left = 950;
+                score++;
+            }
+
+            if (FlappyBird.Bounds.IntersectsWith(pipeBottom.Bounds) ||
+                FlappyBird.Bounds.IntersectsWith(pipetop.Bounds) ||
+                FlappyBird.Bounds.IntersectsWith(ground.Bounds) ||
+                FlappyBird.Top < -25)
+            {
+                endGame();
+            }
+            if (score > 5)
+            {
+                pipeSpeed = 15;
+            }
+
+
+
+
+            }
+
+        private void gameskeydown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                gravity = -15;
+            }
+        }
+
+        private void gameskeyup(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                gravity = 15;
+            }
+        }
+
+        private void endGame()
+        {
+            gameTimer.Stop();
+            scoreText.Text += "  Game Over!!!";
+
+
+
+
+
+        }
+    }
+} 
