@@ -1,25 +1,52 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36717.8 d17.14
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcMedia", "CalcMedia\CalcMedia.csproj", "{7600AD7C-EEC5-40F2-AD1A-3F9A3A345845}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7600AD7C-EEC5-40F2-AD1A-3F9A3A345845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7600AD7C-EEC5-40F2-AD1A-3F9A3A345845}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7600AD7C-EEC5-40F2-AD1A-3F9A3A345845}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7600AD7C-EEC5-40F2-AD1A-3F9A3A345845}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E4392730-E8E4-4C94-9DEF-9ECCF6F2069F}
-	EndGlobalSection
-EndGlobal
+namespace CalcMedia
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)//calcular
+        {
+            float soma, media, valor;
+            soma = 0;
+
+            foreach (Control c in Controls)
+            {
+                if (c is TextBox)
+                {
+                    valor = Convert.ToSingle(((TextBox)c).Text);
+                    soma += valor;
+                    
+                }
+                media = soma / 4;
+                this.Controls["label7"].Text = media.ToString();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e) //limpar
+        {
+            foreach (Control Controle in this.Controls)
+
+                    if(Controle is TextBox)
+                    {
+                    ((TextBox)Controle).Text = "";
+                
+                
+                    }
+
+
+        }
+    }
+}
